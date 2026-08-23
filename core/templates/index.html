@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>РУМТИБЕТ — горные походы и туры</title>
+  <meta name="description" content="Организация горных походов и туров: летние и зимние маршруты, восхождения, треккинг.">
+  <link rel="preload" href="{% static 'fonts/Next-Art/NEXT_ART_Regular.otf' %}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body class="has-hero">
+
+  {% include "components/header.html" %}
+
+  <main>
+    {% include "sections/hero.html" %}
+    {% include "sections/about.html" %}
+    {% include "sections/offer.html" %}
+    {% include "sections/popular.html" %}
+    {% include "sections/blog.html" %}
+    {% include "sections/gallery.html" %}
+    {% include "sections/subscribe.html" %}
+  </main>
+
+  {% include "components/footer.html" %}
+  {% include "components/modals.html" %}
+
+  <script src="{% static 'js/main.js' %}" defer></script>
+</body>
+</html>

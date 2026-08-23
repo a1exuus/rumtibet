@@ -1,0 +1,29 @@
+<section class="subscribe">
+  <div class="container">
+    <div class="subscribe__card">
+      <div class="subscribe__intro">
+        <span class="label">актуально</span>
+        <h2 class="subscribe__title">Получайте полезные рассылки о путешествиях</h2>
+      </div>
+      <form class="subscribe__form" method="post" action="/forms/subscribe/" data-validate novalidate>
+        {% csrf_token %}
+        <div class="subscribe__row">
+          <div class="field subscribe__field">
+            <label for="s-email">Введите e-mail адрес</label>
+            <input id="s-email" name="email" type="email" required placeholder="name@domain.com">
+            <small class="field__error" hidden></small>
+          </div>
+          <button class="btn btn--primary" type="submit">Подписаться на новости</button>
+        </div>
+        <div class="field field--check">
+          <input id="s-consent" type="checkbox" required>
+          <label for="s-consent">
+            Подписываясь на новости, вы автоматически соглашаетесь с
+            <a href="#">условиями обработки персональных данных</a> и
+            <a href="#">правилами рекламных рассылок</a>
+          </label>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

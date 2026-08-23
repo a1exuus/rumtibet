@@ -1,0 +1,15 @@
+<section class="section popular" id="popular">
+  <div class="container">
+    <span class="label label--center">по версии отдыхающих</span>
+    <h2 class="section__title section__title--center">Популярные направления</h2>
+
+    <div class="popular__grid">
+      {% for tour in tours %}
+        {% include "components/tour_card.html" %}
+      {% endfor %}
+    </div>
+    <div class="section__action">
+      <a class="btn btn--primary" href="/programs/?sort=rating">Рейтинг направлений</a>
+    </div>
+  </div>
+</section>

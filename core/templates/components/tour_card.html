@@ -1,0 +1,11 @@
+<article class="tour-card">
+  <img class="tour-card__img" src="{{ tour.image.url }}" alt="{{ tour.title }}" loading="lazy">
+  <span class="tour-card__rating">★ {{ tour.rating|floatformat:1 }}</span>
+  <div class="tour-card__overlay">
+    <div>
+      <h3 class="tour-card__title">{{ tour.title }}</h3>
+      {% if tour.subtitle %}<p class="tour-card__subtitle">{{ tour.subtitle }}</p>{% endif %}
+    </div>
+    <span class="tour-card__price">{{ tour.price|floatformat:0 }} $</span>
+  </div>
+</article>

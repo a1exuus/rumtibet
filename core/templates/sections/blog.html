@@ -1,0 +1,15 @@
+<section class="section section--alt blog" id="blog">
+  <div class="container">
+    <span class="label label--center">делимся впечатлениями</span>
+    <h2 class="section__title section__title--center">Блог о путешествиях</h2>
+
+    <div class="blog__grid">
+      {% for post in posts %}
+        {% include "components/blog_card.html" %}
+      {% endfor %}
+    </div>
+    <div class="section__action">
+      <a class="btn btn--primary" href="/blog/">Другие материалы</a>
+    </div>
+  </div>
+</section>

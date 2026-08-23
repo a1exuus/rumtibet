@@ -1,0 +1,49 @@
+<!-- Модальное окно «Консультация» -->
+<div class="modal" id="modal-consultation" role="dialog" aria-modal="true" aria-label="Заявка на консультацию">
+  <div class="modal__box">
+    <button class="modal__close" data-modal-close aria-label="Закрыть">&times;</button>
+    <h2 class="modal__title">Консультация</h2>
+    <form class="form" method="post" action="/forms/consultation/" data-validate novalidate>
+      {% csrf_token %}
+      <div class="field">
+        <label for="c-name">Имя *</label>
+        <input id="c-name" name="name" type="text" required placeholder="Иван">
+        <small class="field__error" hidden></small>
+      </div>
+      <div class="field">
+        <label for="c-phone">Телефон</label>
+        <input id="c-phone" name="phone" type="tel" placeholder="+7 (___) ___-__-__" data-contact-pair>
+        <small class="field__error" hidden></small>
+      </div>
+      <div class="field">
+        <label for="c-email">E-mail</label>
+        <input id="c-email" name="email" type="email" placeholder="name@domain.com" data-contact-pair>
+        <small class="field__error" hidden></small>
+      </div>
+      <div class="field">
+        <label for="c-comment">Комментарий</label>
+        <textarea id="c-comment" name="comment" rows="3" placeholder="Пожелания к походу"></textarea>
+      </div>
+      <div class="field field--check">
+        <input id="c-consent" type="checkbox" required>
+        <label for="c-consent">Согласен на обработку персональных данных</label>
+      </div>
+      <button class="btn btn--primary btn--block" type="submit">Отправить</button>
+    </form>
+  </div>
+</div>
+
+<!-- Модальное окно с видео -->
+<div class="modal" id="modal-video" role="dialog" aria-modal="true" aria-label="Видео о походах">
+  <div class="modal__box modal__box--video">
+    <button class="modal__close" data-modal-close aria-label="Закрыть">&times;</button>
+    <iframe id="video-frame" src="" title="Видео" allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- Лайтбокс для фотогалереи -->
+<div class="modal" id="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр фото">
+  <button class="modal__close modal__close--light" data-modal-close aria-label="Закрыть">&times;</button>
+  <img id="lightbox-img" src="" alt="">
+</div>

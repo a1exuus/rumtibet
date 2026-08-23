@@ -1,0 +1,30 @@
+{% load static %}
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="/" class="header__logo" aria-label="РУМТИБЕТ — на главную">
+      <svg viewBox="0 0 48 24" class="header__logo-icon" aria-hidden="true">
+        <path d="M0 24 L14 4 L22 14 L30 2 L48 24 Z" fill="currentColor"/>
+      </svg>
+      <span class="header__logo-text">РУМТИБЕТ</span>
+    </a>
+
+    <nav class="header__nav" id="site-nav" aria-label="Главное меню">
+      <button class="header__nav-close" id="nav-close" aria-label="Закрыть меню">&times;</button>
+      <ul class="header__menu">
+        <li><a class="header__link is-active" href="/">Главная</a></li>
+        <li><a class="header__link" href="#about">Про поход</a></li>
+        <li><a class="header__link" href="#popular">Программа тура</a></li>
+        <li><a class="header__link" href="#offer">Стоимость</a></li>
+        <li><a class="header__link" href="#blog">Блог</a></li>
+        <li><a class="header__link" href="#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+
+    <button class="btn btn--primary header__cta" data-modal-open="consultation">Консультация</button>
+
+    <button class="header__burger" id="nav-open" aria-label="Открыть меню"
+            aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>

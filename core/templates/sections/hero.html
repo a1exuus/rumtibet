@@ -1,0 +1,37 @@
+{% load static %}
+<section class="hero">
+  <img class="hero__bg" src="{% static 'images/hero.webp' %}" alt="" fetchpriority="high">
+  <div class="container hero__inner">
+    <h1 class="hero__title">Насладись прогулкой в горах<br>с командой единомышленников</h1>
+
+    <button class="btn btn--light hero__toggle" id="hero-toggle" hidden>Найти программу</button>
+
+    <form class="hero__form" method="get" action="/programs/" data-validate novalidate>
+      <div class="field hero__field">
+        <select name="location" required aria-label="Локация для тура">
+          <option value="" selected disabled>Локация для тура</option>
+          {% for tour in tours %}
+          <option value="{{ tour.id }}">{{ tour.title }}</option>
+          {% endfor %}
+        </select>
+        <small class="field__hint">выберите из списка</small>
+        <small class="field__error" hidden></small>
+      </div>
+      <div class="field hero__field">
+        <input type="date" name="date" required aria-label="Дата похода">
+        <small class="field__hint">укажите диапазон</small>
+        <small class="field__error" hidden></small>
+      </div>
+      <div class="field hero__field">
+        <select name="people" required aria-label="Участники">
+          <option value="" selected disabled>Участники</option>
+          {% for n in "456789" %}<option value="{{ n }}">{{ n }}</option>{% endfor %}
+          <option value="10">10</option><option value="11">11</option><option value="12">12</option>
+        </select>
+        <small class="field__hint">минимум 4 человека</small>
+        <small class="field__error" hidden></small>
+      </div>
+      <button class="btn btn--light" type="submit">Найти программу</button>
+    </form>
+  </div>
+</section>

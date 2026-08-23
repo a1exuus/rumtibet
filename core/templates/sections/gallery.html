@@ -1,0 +1,25 @@
+{% load static %}
+<section class="section gallery">
+  <div class="container">
+    <span class="label label--center">фото-отчет</span>
+    <h2 class="section__title section__title--center">Делимся впечатлениями</h2>
+
+    <div class="gallery__grid">
+      {% for img in gallery_images %}
+      <button class="gallery__item" data-lightbox aria-label="Открыть фото в полном размере">
+        <img src="{{ img.image.url }}" alt="Фото из похода {{ forloop.counter }}" loading="lazy">
+      </button>
+      {% empty %}
+      <!-- Фолбэк, пока бэк не подключён: статические фото -->
+      {% for i in "123456" %}
+      <button class="gallery__item" data-lightbox aria-label="Открыть фото">
+        <img src="{% static 'images/gallery-'|add:i|add:'.webp' %}" alt="" loading="lazy">
+      </button>
+      {% endfor %}
+      {% endfor %}
+    </div>
+    <div class="section__action">
+      <a class="btn btn--primary" href="https://pinterest.com/" target="_blank" rel="noopener">Наш pinterest</a>
+    </div>
+  </div>
+</section>
