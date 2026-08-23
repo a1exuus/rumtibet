@@ -89,6 +89,14 @@ DATABASES = {
 }
 
 
+TINYMCE_DEFAULT_CONFIG = {
+    'height': 500,
+    'menubar': True,
+    'plugins': 'advlist autolink lists link image charmap print preview anchor code',
+    'toolbar': 'undo redo | formatselect | bold italic | code | help',  # Добавил 'code'
+}
+
+
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 

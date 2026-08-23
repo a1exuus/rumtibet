@@ -26,8 +26,9 @@ class TourImageInline(SortableTabularInline):
 
 @admin.register(Tour)
 class TourAdmin(SortableAdminBase, admin.ModelAdmin):
-    list_display = ['title', 'subtitle', 'rating']
+    list_display = ['title', 'subtitle', 'rating', 'is_popular',]
     inlines = [TourImageInline]
+    list_editable = ['is_popular']
 
     def has_delete_permission(self, request, obj=None):
         return False
@@ -35,7 +36,7 @@ class TourAdmin(SortableAdminBase, admin.ModelAdmin):
 
 @admin.register(TourImage)
 class TourImageAdmin(admin.ModelAdmin):
-    list_display = ['tour', 'preview']
+    list_display = ['tour', 'preview',]
     raw_id_fields = ['tour']
     readonly_fields = ['preview']
 
