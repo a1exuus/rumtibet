@@ -1,5 +1,7 @@
 <article class="tour-card">
-  <img class="tour-card__img" src="{{ tour.image.url }}" alt="{{ tour.title }}" loading="lazy">
+  {% if tour.cover %}
+  <img class="tour-card__img" src="{{ tour.cover.image.url }}" alt="{{ tour.title }}" loading="lazy">
+  {% endif %}
   <span class="tour-card__rating">★ {{ tour.rating|floatformat:1 }}</span>
   <div class="tour-card__overlay">
     <div>

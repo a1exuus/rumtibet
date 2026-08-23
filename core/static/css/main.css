@@ -1,12 +1,12 @@
 /* ===== Шрифты ===== */
 @font-face {
   font-family: 'Next Art';
-  src: url('../fonts/Next-Art/NEXT_ART_Regular.otf') format('woff2');
+  src: url('../fonts/Next-Art/NEXT_ART_Regular.otf') format('opentype');
   font-weight: 400; font-display: swap;
 }
 @font-face {
   font-family: 'Next Art';
-  src: url('../fonts/Next-Art/NEXT_ART_Bold.otf') format('woff2');
+  src: url('../fonts/Next-Art/NEXT_ART_Bold.otf') format('opentype');
   font-weight: 700; font-display: swap;
 }
 

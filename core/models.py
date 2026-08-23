@@ -11,6 +11,10 @@ class Tour(models.Model):
     description = HTMLField('Описание', blank=True)
     is_popular = models.BooleanField('Популярное', default=False)
 
+    @property
+    def cover(self):
+        return self.tour_images.first()
+
     class Meta:
         verbose_name = "Направление"
         verbose_name_plural = "Направления"

@@ -36,10 +36,9 @@
     </div>
 
     <div class="offer__collage">
-      <img src="{% static 'images/collage-1.webp' %}" alt="Отдых у воды" loading="lazy">
-      <img src="{% static 'images/collage-2.webp' %}" alt="Турист на вершине" loading="lazy">
-      <img src="{% static 'images/collage-3.webp' %}" alt="Снегоход в горах" loading="lazy">
-      <img src="{% static 'images/collage-4.webp' %}" alt="Горный пейзаж" loading="lazy">
+      {% for img in collage_images %}
+      <img src="{{ img.image.url }}" alt="Фото из похода" loading="lazy">
+      {% endfor %}
     </div>
   </div>
 </section>
