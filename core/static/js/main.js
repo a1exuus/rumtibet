@@ -23,22 +23,15 @@ const heroToggle = document.getElementById('hero-toggle');
 const heroForm = document.querySelector('.hero__form');
 if (heroToggle) heroToggle.addEventListener('click', () => heroForm.classList.toggle('is-open'));
 
-// ===== Нормализация ссылок YouTube =====
-function toEmbedUrl(raw) {
-  raw = (raw || '').trim();
-  if (/^[\w-]{11}$/.test(raw)) {
-    return 'https://www.youtube.com/embed/' + raw + '?autoplay=1&rel=0';
-  }
-  const m = raw.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
-  const base = m ? 'https://www.youtube.com/embed/' + m[1] : raw;
-  try {
-    const url = new URL(base);
-    url.searchParams.set('autoplay', '1');
-    url.searchParams.set('rel', '0');
-    return url.toString();
-  } catch (e) {
-    return base;
-  }
+// ===== Инлайн-видео в блоке «О нашем походе» =====
+const aboutVideo = document.getElementById('about-video');
+const aboutPlay = document.getElementById('about-play');
+if (aboutVideo && aboutPlay) {
+  aboutPlay.addEventListener('click', () => {
+    aboutPlay.hidden = true;
+    aboutVideo.controls = true;
+    aboutVideo.play().catch(() => {});
+  });
 }
 
 // ===== Модальные окна =====
@@ -47,17 +40,20 @@ function openModal(id) {
   if (!modal) return;
   modal.classList.add('is-open');
   document.body.classList.add('no-scroll');
-  if (id === 'video') {
-    const opener = document.querySelector('[data-modal-open="video"]');
-    document.getElementById('video-frame').src = toEmbedUrl(opener.dataset.videoSrc);
-  }
 }
 
 function closeModal(modal) {
   modal.classList.remove('is-open');
   document.body.classList.remove('no-scroll');
+  
   const frame = modal.querySelector('iframe');
-  if (frame) frame.src = 'about:blank'; // корректно останавливает видео
+  if (frame) frame.src = 'about:blank';
+  
+  const video = modal.querySelector('video');
+  if (video) {
+    video.pause();
+    video.currentTime = 0;
+  }
 }
 
 document.querySelectorAll('[data-modal-open]').forEach((btn) =>

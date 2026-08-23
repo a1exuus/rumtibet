@@ -3,12 +3,18 @@
   <div class="container about__inner">
     <div class="about__media">
       <img class="about__img about__img--back" src="{% static 'images/about-1.webp' %}" alt="Горы в облаках" loading="lazy">
-      <img class="about__img about__img--front" src="{% static 'images/about-2.webp' %}" alt="Домик в горах" loading="lazy">
-      <button class="about__play" data-modal-open="video"
-              data-video-src="https://www.youtube.com/embed/zFiqZMTmolY?si=lPTMUSm21xJPc63N"
-              aria-label="Смотреть видео о походе">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
-      </button>
+
+      <!-- Инлайн-плеер вместо переднего фото -->
+      <div class="about__player">
+        <video id="about-video" preload="none" playsinline poster="{% static 'images/about-2.webp' %}">
+          <source src="{% static 'videos/about-tour.mp4' %}" type="video/mp4">
+          Ваш браузер не поддерживает видео.
+        </video>
+        <button class="about__play" id="about-play" aria-label="Смотреть видео о походе">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+        </button>
+      </div>
+      
     </div>
     <div class="about__content">
       <span class="label">О нашем походе</span>

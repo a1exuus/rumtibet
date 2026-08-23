@@ -1,12 +1,12 @@
 /* ===== Шрифты ===== */
 @font-face {
   font-family: 'Next Art';
-  src: url('../fonts/Next-Art/NEXT\ ART_Regular.otf') format('woff2');
+  src: url('../fonts/Next-Art/NEXT_ART_Regular.otf') format('woff2');
   font-weight: 400; font-display: swap;
 }
 @font-face {
   font-family: 'Next Art';
-  src: url('../fonts/Next-Art/NEXT\ ART_Bold.otf') format('woff2');
+  src: url('../fonts/Next-Art/NEXT_ART_Bold.otf') format('woff2');
   font-weight: 700; font-display: swap;
 }
 
@@ -134,15 +134,27 @@ button { font: inherit; }
 .about__media { position: relative; min-height: 460px; }
 .about__img { border-radius: var(--radius); width: 62%; object-fit: cover; }
 .about__img--back { position: absolute; top: 0; left: 0; }
-.about__img--front { position: absolute; bottom: 0; right: 0; z-index: 1; }
-.about__play {
-  position: absolute; z-index: 2; bottom: 38%; right: 26%;
-  width: 56px; height: 56px; border-radius: 50%; border: 0; cursor: pointer;
-  background: rgba(255, 255, 255, .85); color: var(--clr-primary);
-  display: grid; place-items: center; transition: transform .2s;
+
+/* ===== Инлайн-плеер в блоке «О нашем походе» ===== */
+.about__player {
+  position: absolute; bottom: 0; right: 0; z-index: 1;
+  width: 62%; aspect-ratio: 3 / 4;
+  border-radius: var(--radius); overflow: hidden;
+  background: #10201a; box-shadow: var(--shadow);
 }
-.about__play:hover { transform: scale(1.08); }
+.about__player video {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.about__play {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  z-index: 2; width: 56px; height: 56px; border-radius: 50%; border: 0;
+  background: rgba(255, 255, 255, .9); color: var(--clr-primary);
+  display: grid; place-items: center; cursor: pointer; transition: transform .2s;
+}
+.about__play[hidden] { display: none; }
+.about__play:hover { transform: translate(-50%, -50%) scale(1.1); }
 .about__play svg { width: 26px; height: 26px; }
+
 
 /* ===== Offer ===== */
 .offer__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
@@ -281,6 +293,7 @@ button { font: inherit; }
   .hero__title { font-size: 28px; }
   .about__inner, .offer__inner, .subscribe__card { grid-template-columns: 1fr; }
   .about__media { min-height: 380px; }
+  .about__player { width: 75%; }
   .blog__grid { grid-template-columns: 1fr; }
   .blog-card { grid-template-columns: 160px 1fr; }
   .popular__grid { grid-template-columns: 1fr; }
