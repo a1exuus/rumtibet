@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Блог о путешествиях — РУМТИБЕТ</title>
+  <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+  <link rel="preload" href="{% static 'fonts/Next-Art/NEXT_ART_Regular.otf' %}" as="font" type="font/otf" crossorigin>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+
+  {% include "components/header.html" %}
+
+  <main>
+    {% include "components/toasts.html" %}
+    <section class="page-head">
+      <div class="container">
+        <span class="label">делимся впечатлениями</span>
+        <h1 class="page-head__title">Блог о путешествиях</h1>
+        <p class="page-head__text">Истории с троп, гайды по снаряжению и честные советы от наших гидов.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="blog__grid">
+          {% for post in page_obj %}
+            {% include "components/blog_card.html" %}
+          {% empty %}
+          <div class="programs__empty">
+            <p>Статьи скоро появятся — мы уже пишем первую историю с тропы.</p>
+            <a class="btn btn--primary" href="/">На главную</a>
+          </div>
+          {% endfor %}
+        </div>
+
+        {% if page_obj.paginator.num_pages > 1 %}
+        <nav class="pagination" aria-label="Страницы блога">
+          {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" aria-label="Назад">←</a>
+          {% endif %}
+          {% for num in page_obj.paginator.page_range %}
+            {% if num == page_obj.number %}
+              <span class="current">{{ num }}</span>
+            {% else %}
+              <a href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" aria-label="Вперёд">→</a>
+          {% endif %}
+        </nav>
+        {% endif %}
+      </div>
+    </section>
+  </main>
+
+  {% include "components/footer.html" %}
+  {% include "components/modals.html" %}
+
+  <script src="{% static 'js/main.js' %}" defer></script>
+</body>
+</html>

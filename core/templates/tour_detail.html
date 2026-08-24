@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ tour.title }} — РУМТИБЕТ</title>
+  <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+  <link rel="preload" href="{% static 'fonts/Next-Art/NEXT_ART_Regular.otf' %}" as="font" type="font/otf" crossorigin>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+
+  {% include "components/header.html" %}
+
+  <main>
+    {% include "components/toasts.html" %}
+    <section class="page-head">
+      <div class="container">
+        <span class="label">программа тура</span>
+        <h1 class="page-head__title">{{ tour.title }}</h1>
+        <p class="page-head__text">{% if tour.subtitle %}{{ tour.subtitle }} · {% endif %}рейтинг ★ {{ tour.rating|floatformat:1 }}</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 40px;">
+      <div class="container">
+        <div class="tour-gallery">
+          {% for img in images %}
+          <button class="gallery__item" data-lightbox aria-label="Открыть фото в полном размере">
+            <img src="{{ img.image.url }}" alt="{{ tour.title }} — фото {{ forloop.counter }}" loading="lazy">
+          </button>
+          {% empty %}
+          <p class="programs__count">Фотографии тура скоро появятся.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container tour-layout">
+        <div class="tour-main">
+          <h2 class="section__title">Описание</h2>
+          <div class="post-content">{{ tour.description|safe }}</div>
+
+          {% if tour.program %}
+          <h2 class="section__title tour-main__sub">Программа по дням</h2>
+          <div class="post-content">{{ tour.program|safe }}</div>
+          {% endif %}
+        </div>
+
+        <aside class="tour-price-card">
+          <span class="label">стоимость</span>
+          <div class="tour-price-card__price">{{ tour.price|floatformat:0 }} {{ tour.currency }}</div>
+          <p class="tour-price-card__note">за человека · минимум 4 участника</p>
+          <ul class="tour-price-card__list">
+            <li>★ {{ tour.rating|floatformat:1 }} — оценка отдыхающих</li>
+            <li>🧭 Опытный гид и команда сопровождения</li>
+            <li>🛡️ Страховка и гарантии безопасности</li>
+          </ul>
+          <a class="btn btn--primary btn--block" href="#booking">Оставить заявку</a>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="booking">
+      <div class="container">
+        <span class="label label--center">бронирование</span>
+        <h2 class="section__title section__title--center">Заявка на тур</h2>
+
+        <form class="booking-form" method="post" action="/forms/booking/" data-validate novalidate>
+          {% csrf_token %}
+          <input type="hidden" name="tour_id" value="{{ tour.pk }}">
+
+          <div class="field">
+            <label for="b-name">Имя *</label>
+            <input id="b-name" name="name" type="text" required placeholder="Иван">
+            <small class="field__error" hidden></small>
+          </div>
+          <div class="field">
+            <label for="b-phone">Телефон</label>
+            <input id="b-phone" name="phone" type="tel" placeholder="+7 (___) ___-__-__" data-contact-pair>
+            <small class="field__error" hidden></small>
+          </div>
+          <div class="field">
+            <label for="b-email">E-mail</label>
+            <input id="b-email" name="email" type="email" placeholder="name@domain.com" data-contact-pair>
+            <small class="field__error" hidden></small>
+          </div>
+          <div class="field">
+            <label for="b-date">Дата похода</label>
+            <input id="b-date" name="date" type="date" value="{{ initial_date }}">
+          </div>
+          <div class="field">
+            <label for="b-people">Участники</label>
+            <select id="b-people" name="people">
+              {% for n in "456789" %}
+              <option value="{{ n }}" {% if initial_people == n %}selected{% endif %}>{{ n }}</option>
+              {% endfor %}
+              <option value="10" {% if initial_people == "10" %}selected{% endif %}>10</option>
+              <option value="11" {% if initial_people == "11" %}selected{% endif %}>11</option>
+              <option value="12" {% if initial_people == "12" %}selected{% endif %}>12</option>
+            </select>
+          </div>
+          <div class="field booking-form__wide">
+            <label for="b-comment">Комментарий</label>
+            <textarea id="b-comment" name="comment" rows="3" placeholder="Пожелания, вопросы по туру"></textarea>
+          </div>
+          <div class="field field--check booking-form__wide">
+            <input id="b-consent" type="checkbox" required>
+            <label for="b-consent">Согласен на обработку персональных данных</label>
+          </div>
+          <div class="booking-form__wide">
+            <button class="btn btn--primary" type="submit">Отправить заявку</button>
+          </div>
+        </form>
+      </div>
+    </section>
+</main>
+
+  {% include "components/footer.html" %}
+  {% include "components/modals.html" %}
+
+  <script src="{% static 'js/main.js' %}" defer></script>
+</body>
+</html>

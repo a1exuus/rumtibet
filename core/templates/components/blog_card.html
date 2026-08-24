@@ -1,13 +1,13 @@
 <article class="blog-card">
-  <a class="blog-card__media" href="#" tabindex="-1" aria-hidden="true">
+  <a class="blog-card__media" href="{% url 'blog_post' post.pk %}" tabindex="-1" aria-hidden="true">
     <img src="{{ post.image.url }}" alt="{{ post.title }}" loading="lazy">
   </a>
   <div class="blog-card__body">
-    <h3 class="blog-card__title"><a href="#">{{ post.title }}</a></h3>
+    <h3 class="blog-card__title"><a href="{% url 'blog_post' post.pk %}">{{ post.title }}</a></h3>
     <p class="blog-card__excerpt">{{ post.excerpt }}</p>
     <div class="blog-card__meta">
       <time datetime="{{ post.published_date|date:'Y-m-d' }}">{{ post.published_date|date:'d/m/Y' }}</time>
-      <a class="blog-card__link" href="#">читать статью</a>
+      <a class="blog-card__link" href="{% url 'blog_post' post.pk %}">читать статью</a>
     </div>
   </div>
 </article>

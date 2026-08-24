@@ -23,6 +23,19 @@ const heroToggle = document.getElementById('hero-toggle');
 const heroForm = document.querySelector('.hero__form');
 if (heroToggle) heroToggle.addEventListener('click', () => heroForm.classList.toggle('is-open'));
 
+// ===== Тосты: авто-скрытие и закрытие по клику =====
+document.querySelectorAll('.toast').forEach((toast, i) => {
+  let dead = false;
+  const kill = () => {
+    if (dead) return;
+    dead = true;
+    toast.classList.add('is-hiding');
+    setTimeout(() => toast.remove(), 350);
+  };
+  toast.addEventListener('click', kill);
+  setTimeout(kill, 6000 + i * 300);
+});
+
 // ===== Инлайн-видео в блоке «О нашем походе» =====
 const aboutVideo = document.getElementById('about-video');
 const aboutPlay = document.getElementById('about-play');

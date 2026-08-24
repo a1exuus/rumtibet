@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Программы туров — РУМТИБЕТ</title>
+  <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+  <link rel="preload" href="{% static 'fonts/Next-Art/NEXT_ART_Regular.otf' %}" as="font" type="font/otf" crossorigin>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+
+  {% include "components/header.html" %}
+
+  <main>
+    {% include "components/toasts.html" %}
+    <section class="page-head">
+      <div class="container">
+        <span class="label">каталог</span>
+        <h1 class="page-head__title">Программы туров</h1>
+        <p class="page-head__text">Выбирай направление, сравнивай цены и находи свой маршрут — от треккинга для новичков до восхождений.</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <form class="filters" method="get" action="/programs/">
+        <div class="field">
+          <label for="f-location">Направление</label>
+          <select id="f-location" name="location">
+            <option value="">Все направления</option>
+            {% for t in all_tours %}
+            <option value="{{ t.pk }}" {% if filters.location == t.pk|stringformat:"s" %}selected{% endif %}>{{ t.title }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-price">Бюджет</label>
+          <select id="f-price" name="price_max">
+            <option value="">Любой</option>
+            <option value="1000" {% if filters.price_max == "1000" %}selected{% endif %}>до 1 000 $</option>
+            <option value="2000" {% if filters.price_max == "2000" %}selected{% endif %}>до 2 000 $</option>
+            <option value="5000" {% if filters.price_max == "5000" %}selected{% endif %}>до 5 000 $</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-sort">Сортировка</label>
+          <select id="f-sort" name="sort">
+            <option value="rating" {% if filters.sort == "rating" %}selected{% endif %}>По рейтингу</option>
+            <option value="price_asc" {% if filters.sort == "price_asc" %}selected{% endif %}>Дешевле → дороже</option>
+            <option value="price_desc" {% if filters.sort == "price_desc" %}selected{% endif %}>Дороже → дешевле</option>
+          </select>
+        </div>
+        <div class="filters__actions">
+          <button class="btn btn--primary" type="submit">Найти</button>
+          <a class="btn btn--ghost" href="/programs/">Сбросить</a>
+        </div>
+      </form>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <p class="programs__count">Найдено туров: {{ tours|length }}</p>
+        <div class="popular__grid">
+          {% for tour in tours %}
+            {% include "components/tour_card.html" with query=request.GET.urlencode %}
+          {% empty %}
+          <div class="programs__empty">
+            <p>Ничего не нашлось. Попробуй изменить условия или сбрось фильтры.</p>
+            <a class="btn btn--primary" href="/programs/">Сбросить фильтры</a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  {% include "components/footer.html" %}
+  {% include "components/modals.html" %}
+
+  <script src="{% static 'js/main.js' %}" defer></script>
+</body>
+</html>

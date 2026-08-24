@@ -4,6 +4,8 @@
       <div class="subscribe__intro">
         <span class="label">актуально</span>
         <h2 class="subscribe__title">Получайте полезные рассылки о путешествиях</h2>
+        <!-- honeypot: человек не видит, бот заполняет → заявка отбрасывается -->
+        <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
       </div>
       <form class="subscribe__form" method="post" action="/forms/subscribe/" data-validate novalidate>
         {% csrf_token %}

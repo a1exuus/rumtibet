@@ -23,9 +23,13 @@ from core import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='home'),
-    #path('forms/consultation/', views.consultation, name='consultation'),
-    #path('forms/subscribe/', views.subscribe, name='subscribe'),
-    #path('programs/', views.programs, name='programs'),
+    path('forms/consultation/', views.consultation, name='consultation'),
+    path('forms/subscribe/', views.subscribe, name='subscribe'),
+    path('forms/booking/', views.booking, name='booking'),
+    path('programs/<int:pk>/', views.tour_detail, name='tour_detail'),
+    path('programs/', views.programs, name='programs'),
+    path('blog/', views.blog, name='blog'),
+    path('blog/<int:pk>/', views.blog_post, name='blog_post'),
 ]
 
 if settings.DEBUG:

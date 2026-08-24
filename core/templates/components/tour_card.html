@@ -1,13 +1,15 @@
 <article class="tour-card">
-  {% if tour.cover %}
-  <img class="tour-card__img" src="{{ tour.cover.image.url }}" alt="{{ tour.title }}" loading="lazy">
-  {% endif %}
-  <span class="tour-card__rating">★ {{ tour.rating|floatformat:1 }}</span>
-  <div class="tour-card__overlay">
-    <div>
-      <h3 class="tour-card__title">{{ tour.title }}</h3>
-      {% if tour.subtitle %}<p class="tour-card__subtitle">{{ tour.subtitle }}</p>{% endif %}
+  <a class="tour-card__link" href="{% url 'tour_detail' tour.pk %}{% if query %}?{{ query }}{% endif %}" aria-label="{{ tour.title }}">
+    {% if tour.cover %}
+    <img class="tour-card__img" src="{{ tour.cover.image.url }}" alt="{{ tour.title }}" loading="lazy">
+    {% endif %}
+    <span class="tour-card__rating">★ {{ tour.rating|floatformat:1 }}</span>
+    <div class="tour-card__overlay">
+      <div>
+        <h3 class="tour-card__title">{{ tour.title }}</h3>
+        {% if tour.subtitle %}<p class="tour-card__subtitle">{{ tour.subtitle }}</p>{% endif %}
+      </div>
+      <span class="tour-card__price">{{ tour.price|floatformat:0 }} $</span>
     </div>
-    <span class="tour-card__price">{{ tour.price|floatformat:0 }} $</span>
-  </div>
+  </a>
 </article>

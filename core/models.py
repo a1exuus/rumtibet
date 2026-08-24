@@ -9,6 +9,7 @@ class Tour(models.Model):
     currency = models.CharField('Валюта', max_length=3, default='BYN')
     rating = models.DecimalField('Рейтинг', max_digits=3, decimal_places=1)
     description = HTMLField('Описание', blank=True)
+    program = HTMLField('Программа по дням', blank=True)
     is_popular = models.BooleanField('Популярное', default=False)
 
     @property

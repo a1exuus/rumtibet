@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ post.title }} — РУМТИБЕТ</title>
+  <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+  <link rel="preload" href="{% static 'fonts/Next-Art/NEXT_ART_Regular.otf' %}" as="font" type="font/otf" crossorigin>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+
+  {% include "components/header.html" %}
+
+  <main>
+    {% include "components/toasts.html" %}
+    <section class="page-head">
+      <div class="container">
+        <span class="label">блог о путешествиях</span>
+        <h1 class="page-head__title page-head__title--post">{{ post.title }}</h1>
+        <time class="post-date" datetime="{{ post.published_date|date:'Y-m-d' }}">{{ post.published_date|date:'d/m/Y' }}</time>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <img class="post-cover" src="{{ post.image.url }}" alt="{{ post.title }}">
+        <div class="post-content">
+          {{ post.content|safe }}
+        </div>
+        <div class="section__action">
+          <a class="btn btn--primary" href="/blog/">Другие материалы</a>
+        </div>
+      </div>
+    </section>
+
+    {% if related %}
+    <section class="section section--alt">
+      <div class="container">
+        <span class="label label--center">читайте также</span>
+        <h2 class="section__title section__title--center">Похожие статьи</h2>
+        <div class="blog__grid">
+          {% for post in related %}
+            {% include "components/blog_card.html" %}
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% endif %}
+  </main>
+
+  {% include "components/footer.html" %}
+  {% include "components/modals.html" %}
+
+  <script src="{% static 'js/main.js' %}" defer></script>
+</body>
+</html>

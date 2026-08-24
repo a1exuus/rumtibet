@@ -2,6 +2,8 @@
 <!-- Модальное окно «Консультация» -->
 <div class="modal" id="modal-consultation" role="dialog" aria-modal="true" aria-label="Заявка на консультацию">
   <div class="modal__box">
+    <!-- honeypot: человек не видит, бот заполняет → заявка отбрасывается -->
+    <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
     <button class="modal__close" data-modal-close aria-label="Закрыть">&times;</button>
     <h2 class="modal__title">Консультация</h2>
     <form class="form" method="post" action="/forms/consultation/" data-validate novalidate>
